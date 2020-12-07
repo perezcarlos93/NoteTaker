@@ -14,8 +14,8 @@ app.use(express.json());
 
 
 // SERVER ROUTES - HTML and API
-require('./routes/htmlRoutes')(app)
 require('./routes/apiRoutes')(app)
+require('./routes/htmlRoutes')(app)
 
 
 // Telling the server which port to listen in on
