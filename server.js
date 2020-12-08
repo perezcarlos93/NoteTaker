@@ -21,5 +21,5 @@ require('./routes/htmlRoutes')(app)
 // Telling the server which port to listen in on
 // Either the port set by the environment or 3001
 app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`)
+    console.log(`App listening on ${PORT}`)
 });

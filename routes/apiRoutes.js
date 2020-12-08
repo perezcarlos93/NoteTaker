@@ -16,19 +16,26 @@ app.get("/api/notes", function(req, res){
 // Posting received data from db.json
 app.post("/api/notes", function(req, res){
     console.log(req.body)
+    // var jsonDataBase;
+
     fs.readFile("./db/db.json", "utf8", function(err, data){
         if (err) throw err
-        var jsonDataBase = JSON.parse(data)
-        return jsonDataBase;
+        var dataBase = JSON.parse(data)
+        console.log("Current database: " + JSON.stringify(dataBase));
+        var entry = req.body;
+        entry.id = uuidv4();
+        dataBase.push(entry);
+
+        console.log("New database: " + JSON.stringify(dataBase))
+
+        fs.writeFile("./db/db.json", JSON.stringify(dataBase), function(err){
+            if(err) throw err
+            res.json(true)
+            } 
+        )
     })
-    var entry = req.body
-    entry.id = uuidv4();
-    db.push(entry);
-    fs.writeFile("./db/db.json", JSON.stringify(jsonDataBase), function(err){
-        if(err) throw err
-        res.json(true)
-        } 
-    )
+   
+
 })
 
 app.delete("/api/notes/:id", function(req, res){
